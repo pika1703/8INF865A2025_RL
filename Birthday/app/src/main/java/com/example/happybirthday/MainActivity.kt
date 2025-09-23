@@ -6,6 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -34,7 +35,7 @@ class MainActivity : ComponentActivity() {
                          modifier = Modifier.fillMaxSize(),
                          color = MaterialTheme.colorScheme.background
                      ) {
-                         GreetingText(message = "Happy Birthday mon Ami!",
+                         GreetingImage(message = "Happy Birthday mon Ami!",
                              from = "From Romain",
                              modifier = Modifier.padding(8.dp))
                      }
@@ -57,7 +58,8 @@ fun GreetingText(modifier: Modifier = Modifier, message: String, from: String){
         Text(
             text = from,
             fontSize = 36.sp,
-            modifier = modifier.padding(16.dp)
+            modifier = modifier
+                .padding(16.dp)
                 .align(alignment = Alignment.End)
         )
     }
@@ -66,10 +68,17 @@ fun GreetingText(modifier: Modifier = Modifier, message: String, from: String){
 @Composable
 fun GreetingImage(message: String, from: String, modifier: Modifier = Modifier){
     val image = painterResource(R.drawable.androidparty)
-    Image(
-        painter = image,
-        contentDescription = null
-    )
+    Box(modifier) {
+        Image(
+            painter = image,
+            contentDescription = null
+        )
+        GreetingText(message = message,
+            from = from,
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(8.dp))
+    }
 }
 
 @Preview(showBackground = true)
